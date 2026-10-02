@@ -15,6 +15,7 @@ For managing global or single-record settings like the Homepage layout, you can 
 | `id` | `bigIncrements` | No | Primary Key |
 | `hero_bg_video` | `string` | Yes | Path or URL for hero background video |
 | `hero_title` | `string` | No | Main heading text for Hero section |
+| `company_logos` | `json` | Yes | Array of uploaded company / client logo image paths |
 | `section_1_text` | `text` | Yes | Primary body/headline text for Section 1 |
 | `section_1_button_text` | `string` | Yes | Label for the Section 1 CTA button |
 | `section_1_button_link` | `string` | Yes | URL / route target for the Section 1 CTA button |
@@ -26,6 +27,7 @@ For managing global or single-record settings like the Homepage layout, you can 
 | :--- | :--- | :--- | :--- |
 | **Hero Section** | Background Video | `FileUpload` / `TextInput` | `FileUpload::make('hero_bg_video')->acceptedFileTypes(['video/mp4', 'video/webm'])->directory('homepage')` or `TextInput::make('hero_bg_video')->url()` |
 | **Hero Section** | Title Text | `TextInput` | `TextInput::make('hero_title')->required()->maxLength(255)` |
+| **Hero Section** | Company Logos | `FileUpload` | `FileUpload::make('company_logos')->multiple()->image()->reorderable()->directory('homepage/logos')` |
 | **Section 1** | Text Content | `Textarea` / `RichEditor` | `Textarea::make('section_1_text')->rows(4)` or `RichEditor::make('section_1_text')` |
 | **Section 1** | Button Text | `TextInput` | `TextInput::make('section_1_button_text')->maxLength(100)` |
 | **Section 1** | Button Link | `TextInput` | `TextInput::make('section_1_button_link')->url()` |
@@ -79,6 +81,8 @@ Manages portfolio showcase items, including featured image, gallery, tag, and ri
 | `featured_image` | `string` | Yes | Path to featured image asset |
 | `title` | `string` | No | Project name / title |
 | `sub_title` | `string` | Yes | Brief subtitle / tagline |
+| `logo` | `string` | Yes | Path to client/brand logo image |
+| `is_highlight` | `boolean` | No | Display logo in homepage hero section if true |
 | `tag` | `json` / `string` | Yes | Category tag(s) (e.g. `["Branding", "Web"]`) |
 | `year` | `integer` / `string` | Yes | Year completed (e.g. `2024`) |
 | `gallery` | `json` | Yes | Array of image paths (`["projects/g1.jpg", ...]`) |
@@ -91,6 +95,7 @@ protected $casts = [
     'gallery' => 'array',
     'tag' => 'array', // or string depending on multi-tag vs single tag
     'year' => 'integer',
+    'is_highlight' => 'boolean',
 ];
 ```
 
@@ -101,6 +106,8 @@ protected $casts = [
 | **Featured Image** | `FileUpload` | `FileUpload::make('featured_image')->image()->directory('projects/featured')->imageEditor()->columnSpanFull()` |
 | **Title** | `TextInput` | `TextInput::make('title')->required()->maxLength(255)->live(onBlur: true)->afterStateUpdated(fn ($state, callable $set) => $set('slug', \Illuminate\Support\Str::slug($state)))` |
 | **Sub-title** | `TextInput` | `TextInput::make('sub_title')->maxLength(255)` |
+| **Upload Logo** | `FileUpload` | `FileUpload::make('logo')->image()->directory('projects/logos')->label('Upload Logo')` |
+| **Highlight** | `Toggle` | `Toggle::make('is_highlight')->label('Highlight')->default(false)` |
 | **Tag** | `TagsInput` / `TextInput` | `TagsInput::make('tag')->placeholder('Add tags...')` |
 | **Year** | `TextInput` | `TextInput::make('year')->numeric()->length(4)->default(date('Y'))` |
 | **Gallery** | `FileUpload` | `FileUpload::make('gallery')->multiple()->image()->reorderable()->directory('projects/gallery')->columnSpanFull()` |

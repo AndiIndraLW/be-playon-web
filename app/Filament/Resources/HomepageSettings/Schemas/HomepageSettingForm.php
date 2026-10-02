@@ -14,10 +14,26 @@ class HomepageSettingForm
         return $schema
             ->components([
                 FileUpload::make('hero_bg_video')
-                    ->acceptedFileTypes(['video/mp4', 'video/webm'])
-                    ->directory('homepage'),
+                    ->label('Hero Background Video')
+                    ->disk('public')
+                    ->visibility('public')
+                    ->acceptedFileTypes(['video/mp4', 'video/webm', 'video/quicktime', 'video/x-msvideo'])
+                    ->maxSize(512000)
+                    ->directory('homepage')
+                    ->previewable(false)
+                    ->openable()
+                    ->downloadable(),
                 TextInput::make('hero_title')
                     ->maxLength(255),
+                FileUpload::make('company_logos')
+                    ->label('Company / Client Logos')
+                    ->disk('public')
+                    ->visibility('public')
+                    ->multiple()
+                    ->image()
+                    ->reorderable()
+                    ->directory('homepage/logos')
+                    ->columnSpanFull(),
                 Textarea::make('section_1_text')
                     ->rows(4)
                     ->columnSpanFull(),
