@@ -15,6 +15,7 @@ For managing global or single-record settings like the Homepage layout, you can 
 | `id` | `bigIncrements` | No | Primary Key |
 | `hero_bg_video` | `string` | Yes | Path or URL for hero background video |
 | `hero_title` | `string` | No | Main heading text for Hero section |
+| `hero_subtitle` | `text` | Yes | Subtitle / description text for Hero section |
 | `company_logos` | `json` | Yes | Array of uploaded company / client logo image paths |
 | `section_1_text` | `text` | Yes | Primary body/headline text for Section 1 |
 | `section_1_button_text` | `string` | Yes | Label for the Section 1 CTA button |
@@ -27,6 +28,7 @@ For managing global or single-record settings like the Homepage layout, you can 
 | :--- | :--- | :--- | :--- |
 | **Hero Section** | Background Video | `FileUpload` / `TextInput` | `FileUpload::make('hero_bg_video')->acceptedFileTypes(['video/mp4', 'video/webm'])->directory('homepage')` or `TextInput::make('hero_bg_video')->url()` |
 | **Hero Section** | Title Text | `TextInput` | `TextInput::make('hero_title')->required()->maxLength(255)` |
+| **Hero Section** | Subtitle / Little Text | `Textarea` | `Textarea::make('hero_subtitle')->rows(2)->columnSpanFull()` |
 | **Hero Section** | Company Logos | `FileUpload` | `FileUpload::make('company_logos')->multiple()->image()->reorderable()->directory('homepage/logos')` |
 | **Section 1** | Text Content | `Textarea` / `RichEditor` | `Textarea::make('section_1_text')->rows(4)` or `RichEditor::make('section_1_text')` |
 | **Section 1** | Button Text | `TextInput` | `TextInput::make('section_1_button_text')->maxLength(100)` |

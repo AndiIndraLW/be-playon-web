@@ -19,6 +19,7 @@ class ContentSeeder extends Seeder
             [
                 'hero_bg_video' => null, // fallback to static video if empty
                 'hero_title' => 'Play On, Next-Gen Visuals & Immersive Broadcast Experiences',
+                'hero_subtitle' => 'Events End. We Play On. We create unforgettable experiences and brand activations that resonate long after.',
                 'section_1_text' => 'PLAYON IS AN ESports AND CREATIVE TECHNOLOGY STUDIO SPECIALIZING IN ARENA BROADCASTS, 3D STAGE VISUALS, AND BRAND EXPERIENCES WORLDWIDE.',
                 'section_1_button_text' => 'contact us',
                 'section_1_button_link' => '/contact',

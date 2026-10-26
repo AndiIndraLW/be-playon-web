@@ -24,7 +24,13 @@ class HomepageSettingForm
                     ->openable()
                     ->downloadable(),
                 TextInput::make('hero_title')
+                    ->label('Hero Title')
                     ->maxLength(255),
+                Textarea::make('hero_subtitle')
+                    ->label('Hero Subtitle / Description')
+                    ->helperText('Little text displayed beneath the main hero title on the homepage')
+                    ->rows(2)
+                    ->columnSpanFull(),
                 FileUpload::make('company_logos')
                     ->label('Company / Client Logos')
                     ->disk('public')

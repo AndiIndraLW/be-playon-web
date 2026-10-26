@@ -18,6 +18,9 @@ class HomepageSettingsTable
                     ->searchable(),
                 TextColumn::make('hero_title')
                     ->searchable(),
+                TextColumn::make('hero_subtitle')
+                    ->limit(40)
+                    ->searchable(),
                 TextColumn::make('section_1_button_text')
                     ->searchable(),
                 TextColumn::make('section_1_button_link')
